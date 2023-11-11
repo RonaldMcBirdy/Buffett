@@ -1,0 +1,10 @@
+C:\project\Buffett\Buffett.Contracts\bin\Debug\netstandard2.0\Buffett.Contracts.deps.json
+C:\project\Buffett\Buffett.Contracts\bin\Debug\netstandard2.0\Buffett.Contracts.dll
+C:\project\Buffett\Buffett.Contracts\bin\Debug\netstandard2.0\Buffett.Contracts.pdb
+C:\project\Buffett\Buffett.Contracts\obj\Debug\netstandard2.0\Buffett.Contracts.csproj.AssemblyReference.cache
+C:\project\Buffett\Buffett.Contracts\obj\Debug\netstandard2.0\Buffett.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+C:\project\Buffett\Buffett.Contracts\obj\Debug\netstandard2.0\Buffett.Contracts.AssemblyInfoInputs.cache
+C:\project\Buffett\Buffett.Contracts\obj\Debug\netstandard2.0\Buffett.Contracts.AssemblyInfo.cs
+C:\project\Buffett\Buffett.Contracts\obj\Debug\netstandard2.0\Buffett.Contracts.csproj.CoreCompileInputs.cache
+C:\project\Buffett\Buffett.Contracts\obj\Debug\netstandard2.0\Buffett.Contracts.dll
+C:\project\Buffett\Buffett.Contracts\obj\Debug\netstandard2.0\Buffett.Contracts.pdb

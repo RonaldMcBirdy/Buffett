@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Buffett.Contracts", "Buffett.Contracts\Buffett.Contracts.csproj", "{6084DF7B-5272-4FDD-9F7A-C66F7566FDD5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Buffett.Endpoint", "Buffett.Endpoint\Buffett.Endpoint.csproj", "{96E84468-22EB-4A8E-898E-153E8A657E46}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6084DF7B-5272-4FDD-9F7A-C66F7566FDD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6084DF7B-5272-4FDD-9F7A-C66F7566FDD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6084DF7B-5272-4FDD-9F7A-C66F7566FDD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6084DF7B-5272-4FDD-9F7A-C66F7566FDD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96E84468-22EB-4A8E-898E-153E8A657E46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96E84468-22EB-4A8E-898E-153E8A657E46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96E84468-22EB-4A8E-898E-153E8A657E46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96E84468-22EB-4A8E-898E-153E8A657E46}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {88AF3D5D-4B25-449D-9207-E1E56CFDBD98}
+	EndGlobalSection
+EndGlobal
