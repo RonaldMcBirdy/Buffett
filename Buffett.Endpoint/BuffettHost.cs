@@ -1,13 +1,11 @@
-﻿using Buffett.Endpoint.Cache;
+﻿using Buffett.Endpoint.Alpha;
+using Buffett.Endpoint.Cache;
 using Buffett.Endpoint.Clients;
 using Buffett.Endpoint.Returns;
 using Funq;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using ServiceStack;
-using ServiceStack.Data;
-using ServiceStack.OrmLite;
-using ServiceStack.Validation;
 
 namespace Buffett.Endpoint
 {
@@ -26,15 +24,19 @@ namespace Buffett.Endpoint
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .Build();
 
-            // Set up database connection
-            // connectionString = config.GetConnectionString("MySqlConnection");
-            // IDbConnectionFactory dbFactory = new OrmLiteConnectionFactory(connectionString, MySqlDialect.Provider);
-
             // register services
             container.AddSingleton<IMemoryCache>(new MemoryCache(new MemoryCacheOptions()));
             container.AddSingleton<IReturnsManager, ReturnsManager>();
+            container.AddSingleton<IAlphaManager, AlphaManager>();
             container.AddSingleton<IAlphaVantageClient, AlphaVantageClient>();
             container.AddSingleton<ITickerCache, TickerCache>();
+            container.AddSingleton<ITreasuryCache, TreasuryCache>();
+
+            // Resolve the IStartupService and call RunAtStartup
+            var tickerCache = container.Resolve<ITickerCache>();
+            var treasuryCache = container.Resolve<ITreasuryCache>();
+            Task.Run(() => tickerCache.PreloadCacheAsync()).Wait();
+            // Task.Run(() => treasuryCache.PreloadCacheAsync()).Wait();
         }
     }
 }

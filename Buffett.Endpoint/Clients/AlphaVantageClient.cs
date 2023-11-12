@@ -1,6 +1,7 @@
 ﻿using Buffett.Endpoint.Models;
 using Buffett.Endpoint.Settings;
 using Microsoft.Extensions.Options;
+using ServiceStack.Auth;
 using System.Text.Json;
 
 namespace Buffett.Endpoint.Clients
@@ -10,6 +11,8 @@ namespace Buffett.Endpoint.Clients
         private readonly IOptionsMonitor<BuffettSettings> _options;
         private readonly HttpClient _httpClient;
         private readonly string AlphaVantageGetTickerBaseQuery = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&outputsize=full";
+        private readonly string AlphaVantageGetTreasuryBaseQuery = "https://www.alphavantage.co/query?function=TREASURY_YIELD&interval=monthly";
+
         public AlphaVantageClient(IOptionsMonitor<BuffettSettings> options) 
         {
             _options = options;
@@ -20,7 +23,7 @@ namespace Buffett.Endpoint.Clients
         {
             try
             {
-                var response = await _httpClient.GetAsync(QueryBuilder(ticker));
+                var response = await _httpClient.GetAsync(ReturnsQueryBuilder(ticker));
                 response.EnsureSuccessStatusCode();
                 string jsonString = await response.Content.ReadAsStringAsync();
 
@@ -29,7 +32,7 @@ namespace Buffett.Endpoint.Clients
 
                 if (stockData.Error != null)
                 {
-                    throw new Exception($"Ticker : {ticker}, {stockData.Error}");
+                    throw new Exception($"Ticker : {ticker} -> {stockData.Error}");
                 }
                 return stockData;
             }
@@ -45,10 +48,45 @@ namespace Buffett.Endpoint.Clients
             }
         }
 
-        private string QueryBuilder(string ticker)
+        public async Task<TreasuryRate> GetTreasuryAsync(string treasuryMaturity)
         {
-            var x = AlphaVantageGetTickerBaseQuery +
+            try
+            {
+                //var response = await _httpClient.GetAsync(TreasuryQueryBuilder(treasuryMaturity));
+                //response.EnsureSuccessStatusCode();
+                //string jsonString = await response.Content.ReadAsStringAsync();
+
+                string jsonString = await File.ReadAllTextAsync("C:\\project\\Buffett\\treasuryReturn.json");
+                var treasuryData = JsonSerializer.Deserialize<TreasuryRate>(jsonString);
+
+                if (treasuryData.Error != null)
+                {
+                    throw new Exception($"Treasury Maturity : {treasuryMaturity} -> {treasuryData.Error}");
+                }
+                return treasuryData;
+            }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine($"HTTP Request Exception: {ex.Message}");
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception when fetching treasury data for treasuryMaturity {treasuryMaturity}: {ex.Message}");
+                throw;
+            }
+        }
+
+        private string ReturnsQueryBuilder(string ticker)
+        {
+            return AlphaVantageGetTickerBaseQuery +
                 "&symbol=" + ticker + "&apikey=" + _options.CurrentValue.ApiKey;
+        }
+
+        private string TreasuryQueryBuilder(string treasuryMaturity)
+        {
+            var x = AlphaVantageGetTreasuryBaseQuery +
+                "&maturity=" + treasuryMaturity + "&apikey=" + _options.CurrentValue.ApiKey;
             return x;
         }
     }

@@ -1,4 +1,5 @@
 ﻿using Buffett.Endpoint.Clients;
+using Buffett.Endpoint.Constants;
 using Buffett.Endpoint.Models;
 using Microsoft.Extensions.Caching.Memory;
 
@@ -31,6 +32,11 @@ namespace Buffett.Endpoint.Cache
                 var stockData = await RefreshCache(ticker);
                 return stockData;
             }
+        }
+
+        public async Task PreloadCacheAsync()
+        {
+            await RefreshCache(StockConstants.Spy);
         }
 
         private async Task<StockData> RefreshCache(string ticker)

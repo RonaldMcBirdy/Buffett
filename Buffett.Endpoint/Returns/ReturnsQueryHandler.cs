@@ -1,5 +1,6 @@
 ﻿using Buffett.Contracts.Query;
 using Buffett.Endpoint.Settings;
+using Buffett.Endpoint.Validators;
 using Microsoft.Extensions.Options;
 using ServiceStack;
 using ServiceStack.FluentValidation;
@@ -22,13 +23,7 @@ namespace Buffett.Endpoint.Returns
             }
             else
             {
-                var validator = new ReturnsQueryValidator();
-                var result = validator.Validate(query);
-
-                if (!result.IsValid)
-                {
-                    throw new ValidationException(result.Errors);
-                }
+                DateTimeValidator.ValidateQuery(query.FromDate, query.ToDate);
             }
 
             var returnsList = await _returnsManager.GetReturnsAsync(query.FromDate.Value, query.ToDate.Value, query.Ticker);

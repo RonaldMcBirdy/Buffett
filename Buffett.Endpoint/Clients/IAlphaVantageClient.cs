@@ -6,5 +6,6 @@ namespace Buffett.Endpoint.Clients
     public interface IAlphaVantageClient
     {
         public Task<StockData> GetReturnsAsync(string ticker);
+        public Task<TreasuryRate> GetTreasuryAsync(string treasuryMaturity);
     }
 }

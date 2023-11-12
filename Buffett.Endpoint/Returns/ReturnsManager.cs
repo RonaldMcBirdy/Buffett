@@ -1,6 +1,7 @@
 ﻿using Buffett.Contracts.Models;
 using Buffett.Endpoint.Cache;
 using Buffett.Endpoint.Comparers;
+using Buffett.Endpoint.Helpers;
 using Buffett.Endpoint.Models;
 
 namespace Buffett.Endpoint.Returns
@@ -18,7 +19,7 @@ namespace Buffett.Endpoint.Returns
         {
             var stockSeries = await _tickerCache.GetTimeSeriesAsync(ticker);
             var sortedDates = stockSeries.GetSortedDatesDescending();
-            var index = FindStartingIndex(sortedDates, toDate);
+            var index = SortedDateListHelper.FindIndex(sortedDates, toDate);
 
             List<StockDailyReturn> stockDailyReturns = new List<StockDailyReturn>();
             var currentDate = sortedDates[index];
@@ -40,18 +41,6 @@ namespace Buffett.Endpoint.Returns
             }
 
             return stockDailyReturns;
-        }
-
-        private int FindStartingIndex(List<DateTime> sortedList, DateTime target)
-        {
-            int index = sortedList.BinarySearch(target, new DateTimeDescendingComparer());
-            var foundIndex = index < 0 ? ~index : index;
-
-            if (foundIndex >= sortedList.Count)
-            {
-                throw new ArgumentException("There is no data between these dates");
-            }
-            return foundIndex;
         }
 
         private decimal GetReturnForDay(StockData stockData, DateTime dateToRetrieve)

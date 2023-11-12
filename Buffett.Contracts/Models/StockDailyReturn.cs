@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Buffett.Contracts.Models
+﻿namespace Buffett.Contracts.Models
 {
     public class StockDailyReturn
     {
