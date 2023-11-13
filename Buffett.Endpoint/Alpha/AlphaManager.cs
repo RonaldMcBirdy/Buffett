@@ -63,8 +63,8 @@ namespace Buffett.Endpoint.Alpha
         {
             var sortedDates = stock.GetSortedDatesDescending();
 
-            var firstDateIndex = SortedDateListHelper.FindIndex(sortedDates, toDate);
-            var lastDateIndex = SortedDateListHelper.FindIndex(sortedDates, fromDate);
+            var firstDateIndex = SortedDateListHelper.FindIndex(sortedDates, toDate, true);
+            var lastDateIndex = SortedDateListHelper.FindIndex(sortedDates, fromDate, false);
 
             if (stock.TimeSeriesDaily.TryGetValue(sortedDates[firstDateIndex].ToString("yyyy-MM-dd"), out var toStockInfo) &&
                 stock.TimeSeriesDaily.TryGetValue(sortedDates[lastDateIndex].ToString("yyyy-MM-dd"), out var fromStockInfo))
@@ -101,13 +101,11 @@ namespace Buffett.Endpoint.Alpha
         // https://www.investopedia.com/articles/financial-theory/11/calculating-covariance.asp
         private decimal CalculateCovariance(List<decimal> returns1, List<decimal> returns2)
         {
-            // Check if the input arrays have the same length
             if (returns1.Count != returns2.Count)
             {
-                throw new ArgumentException("Market data or selected stock ticker do not have the same number of days");
+                throw new Exception("Market data or selected stock ticker do not have the same number of days");
             }
 
-            // Calculate means of returns
             decimal meanReturns1 = returns1.Average();
             decimal meanReturns2 = returns2.Average();
 
@@ -129,7 +127,6 @@ namespace Buffett.Endpoint.Alpha
         // https://www.investopedia.com/terms/v/variance.asp
         private decimal CalculateVariance(List<decimal> returns)
         {
-            // Calculate the mean of returns
             decimal meanReturns = returns.Average();
 
             // Calculate the sum of squared differences

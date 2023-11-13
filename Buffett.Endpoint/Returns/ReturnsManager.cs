@@ -19,7 +19,7 @@ namespace Buffett.Endpoint.Returns
         {
             var stockSeries = await _tickerCache.GetTimeSeriesAsync(ticker);
             var sortedDates = stockSeries.GetSortedDatesDescending();
-            var index = SortedDateListHelper.FindIndex(sortedDates, toDate);
+            var index = SortedDateListHelper.FindIndex(sortedDates, toDate, true);
 
             List<StockDailyReturn> stockDailyReturns = new List<StockDailyReturn>();
             var currentDate = sortedDates[index];

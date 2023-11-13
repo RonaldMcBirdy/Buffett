@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Buffett.Contracts", "Buffet
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Buffett.Endpoint", "Buffett.Endpoint\Buffett.Endpoint.csproj", "{96E84468-22EB-4A8E-898E-153E8A657E46}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buffett.UnitTests", "Buffett.UnitTests\Buffett.UnitTests.csproj", "{DCDB6427-D219-4820-9FF8-E1173E3FAF3D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{96E84468-22EB-4A8E-898E-153E8A657E46}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96E84468-22EB-4A8E-898E-153E8A657E46}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96E84468-22EB-4A8E-898E-153E8A657E46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCDB6427-D219-4820-9FF8-E1173E3FAF3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCDB6427-D219-4820-9FF8-E1173E3FAF3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCDB6427-D219-4820-9FF8-E1173E3FAF3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCDB6427-D219-4820-9FF8-E1173E3FAF3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

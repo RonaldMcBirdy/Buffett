@@ -32,11 +32,11 @@ namespace Buffett.Endpoint
             container.AddSingleton<ITickerCache, TickerCache>();
             container.AddSingleton<ITreasuryCache, TreasuryCache>();
 
-            // Resolve the IStartupService and call RunAtStartup
+            // Resolve the caches and call PreloadCacheAsync
             var tickerCache = container.Resolve<ITickerCache>();
             var treasuryCache = container.Resolve<ITreasuryCache>();
             Task.Run(() => tickerCache.PreloadCacheAsync()).Wait();
-            // Task.Run(() => treasuryCache.PreloadCacheAsync()).Wait();
+            Task.Run(() => treasuryCache.PreloadCacheAsync()).Wait();
         }
     }
 }

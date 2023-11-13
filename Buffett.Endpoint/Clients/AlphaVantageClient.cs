@@ -27,7 +27,6 @@ namespace Buffett.Endpoint.Clients
                 response.EnsureSuccessStatusCode();
                 string jsonString = await response.Content.ReadAsStringAsync();
 
-                // string jsonString = await File.ReadAllTextAsync("C:\\project\\Buffett\\ExampleTickerresponse.json");
                 var stockData = JsonSerializer.Deserialize<StockData>(jsonString);
 
                 if (stockData.Error != null)
@@ -52,11 +51,9 @@ namespace Buffett.Endpoint.Clients
         {
             try
             {
-                //var response = await _httpClient.GetAsync(TreasuryQueryBuilder(treasuryMaturity));
-                //response.EnsureSuccessStatusCode();
-                //string jsonString = await response.Content.ReadAsStringAsync();
-
-                string jsonString = await File.ReadAllTextAsync("C:\\project\\Buffett\\treasuryReturn.json");
+                var response = await _httpClient.GetAsync(TreasuryQueryBuilder(treasuryMaturity));
+                response.EnsureSuccessStatusCode();
+                string jsonString = await response.Content.ReadAsStringAsync();
                 var treasuryData = JsonSerializer.Deserialize<TreasuryRate>(jsonString);
 
                 if (treasuryData.Error != null)
